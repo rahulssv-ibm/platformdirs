@@ -1,5 +1,6 @@
 name: Release to PyPI
 on:
+  workflow_dispatch:
   push:
     tags: ["*"]
 
@@ -8,7 +9,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04-ppc64le
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,7 +31,7 @@ jobs:
   release:
     needs:
       - build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04-ppc64le
     environment:
       name: release
       url: https://pypi.org/project/platformdirs/${{ github.ref_name }}
